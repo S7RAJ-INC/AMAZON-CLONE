@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon - Gift Cards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f3f3f3;
+        }
+
+        .header {
+            background-color: #131921;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .search-bar {
+            display: flex;
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search-bar button {
+            padding: 10px 15px;
+            background-color: #febd69;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            color: #131921;
+            font-size: 24px;
+            margin-right: 20px;
+        }
+
+        .section-header .icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            background-color: #febd69;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #131921;
+            font-size: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: #f8f8f8;
+            padding: 25px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: #0066c0;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .card p {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .card a {
+            color: #0066c0;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .card a:hover {
+            text-decoration: underline;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            color: #0066c0;
+            position: absolute;
+            left: 0;
+        }
+
+        .cta-button {
+            background-color: #febd69;
+            color: #131921;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background-color: #f3a847;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+                max-width: none;
+            }
+
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .nav-links a {
+                padding: 5px 10px;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 4px;
+            }
+
+            .container {
+                padding: 10px;
+                margin: 10px auto;
+            }
+
+            .page-header {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .page-header h1 {
+                font-size: 24px;
+            }
+
+            .gift-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .gift-card {
+                padding: 15px;
+            }
+
+            .gift-card h3 {
+                font-size: 18px;
+            }
+
+            .gift-card p {
+                font-size: 14px;
+            }
+
+            .feature-list {
+                margin: 10px 0;
+            }
+
+            .feature-list li {
+                font-size: 14px;
+                padding: 5px 0;
+            }
+
+            .action-button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 8px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .search-bar input {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .search-bar button {
+                padding: 8px 12px;
+            }
+
+            .nav-links {
+                gap: 5px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+                padding: 4px 8px;
+            }
+
+            .page-header h1 {
+                font-size: 20px;
+            }
+
+            .gift-cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gift-card {
+                padding: 12px;
+            }
+
+            .gift-card h3 {
+                font-size: 16px;
+            }
+
+            .gift-card p {
+                font-size: 13px;
+            }
+
+            .feature-list {
+                margin: 8px 0;
+            }
+
+            .feature-list li {
+                font-size: 13px;
+                padding: 4px 0;
+            }
+
+            .action-button {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Amazon</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for gift cards...">
+            <button>Search</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="customer-service.html">Customer Service</a>
+            <a href="registry.html">Registry</a>
+            <a href="gift-cards.html">Gift Cards</a>
+            <a href="sell.html">Sell</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <div class="section-header">
+                <div class="icon">💳</div>
+                <h2>Gift Cards</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>eGift Cards</h3>
+                    <p>Send digital gift cards instantly via email.</p>
+                    <ul class="feature-list">
+                        <li>Instant delivery</li>
+                        <li>Customizable designs</li>
+                        <li>Schedule delivery</li>
+                        <li>Multiple denominations</li>
+                    </ul>
+                    <a href="#" class="cta-button">Buy eGift Cards</a>
+                </div>
+                <div class="card">
+                    <h3>Physical Gift Cards</h3>
+                    <p>Send physical gift cards with free shipping.</p>
+                    <ul class="feature-list">
+                        <li>Multiple designs</li>
+                        <li>Free shipping</li>
+                        <li>Custom messages</li>
+                        <li>Premium packaging</li>
+                    </ul>
+                    <a href="#" class="cta-button">Buy Physical Cards</a>
+                </div>
+                <div class="card">
+                    <h3>Gift Card Balance</h3>
+                    <p>Check your gift card balance and redeem codes.</p>
+                    <ul class="feature-list">
+                        <li>Check balance</li>
+                        <li>Redeem codes</li>
+                        <li>Transaction history</li>
+                        <li>Auto-reload options</li>
+                    </ul>
+                    <a href="#" class="cta-button">Check Balance</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle gift card card clicks
+        document.querySelectorAll('.card').forEach(card => {
+            const button = card.querySelector('.cta-button');
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const giftCardType = card.querySelector('h3').textContent;
+                
+                switch(giftCardType) {
+                    case 'eGift Cards':
+                        alert('Redirecting to eGift Cards purchase page...');
+                        // Here you would typically redirect to an eGift Cards purchase page
+                        break;
+                    case 'Physical Gift Cards':
+                        alert('Redirecting to Physical Gift Cards purchase page...');
+                        // Here you would typically redirect to a Physical Gift Cards purchase page
+                        break;
+                    case 'Gift Card Balance':
+                        alert('Redirecting to Gift Card Balance check page...');
+                        // Here you would typically redirect to a Gift Card Balance check page
+                        break;
+                }
+            });
+        });
+
+        // Handle search functionality
+        document.querySelector('.search-bar button').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-bar input').value;
+            if (searchTerm.trim()) {
+                alert(`Searching for gift cards matching "${searchTerm}"...`);
+            } else {
+                alert('Please enter a search term.');
+            }
+        });
+
+        // Handle search input enter key
+        document.querySelector('.search-bar input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-bar button').click();
+            }
+        });
+
+        // Handle feature list hover effects
+        document.querySelectorAll('.feature-list li').forEach(item => {
+            item.addEventListener('mouseover', function() {
+                this.style.transform = 'translateX(5px)';
+                this.style.transition = 'transform 0.2s ease';
+            });
+            
+            item.addEventListener('mouseout', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body>
+</html> 

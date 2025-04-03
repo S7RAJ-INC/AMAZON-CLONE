@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon - Sell</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f3f3f3;
+        }
+
+        .header {
+            background-color: #131921;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .search-bar {
+            display: flex;
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search-bar button {
+            padding: 10px 15px;
+            background-color: #febd69;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .sell-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .sell-header h1 {
+            font-size: 32px;
+            color: #131921;
+            margin-bottom: 20px;
+        }
+
+        .sell-header p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .sell-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .sell-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .sell-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .sell-card h2 {
+            color: #0066c0;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .sell-card p {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .sell-card a {
+            color: #0066c0;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .sell-card a:hover {
+            text-decoration: underline;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            color: #0066c0;
+            position: absolute;
+            left: 0;
+        }
+
+        .cta-button {
+            background-color: #febd69;
+            color: #131921;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background-color: #f3a847;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+                max-width: none;
+            }
+
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .nav-links a {
+                padding: 5px 10px;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 4px;
+            }
+
+            .container {
+                padding: 10px;
+                margin: 10px auto;
+            }
+
+            .sell-header {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .sell-header h1 {
+                font-size: 24px;
+            }
+
+            .sell-header p {
+                font-size: 16px;
+            }
+
+            .sell-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .sell-card {
+                padding: 15px;
+            }
+
+            .sell-card h2 {
+                font-size: 18px;
+            }
+
+            .sell-card p {
+                font-size: 14px;
+            }
+
+            .feature-list {
+                margin: 10px 0;
+            }
+
+            .feature-list li {
+                font-size: 14px;
+                padding: 5px 0;
+            }
+
+            .cta-button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 8px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .search-bar input {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .search-bar button {
+                padding: 8px 12px;
+            }
+
+            .nav-links {
+                gap: 5px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+                padding: 4px 8px;
+            }
+
+            .sell-header h1 {
+                font-size: 20px;
+            }
+
+            .sell-header p {
+                font-size: 14px;
+            }
+
+            .sell-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sell-card {
+                padding: 12px;
+            }
+
+            .sell-card h2 {
+                font-size: 16px;
+            }
+
+            .sell-card p {
+                font-size: 13px;
+            }
+
+            .feature-list {
+                margin: 8px 0;
+            }
+
+            .feature-list li {
+                font-size: 13px;
+                padding: 4px 0;
+            }
+
+            .cta-button {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Amazon</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for selling options...">
+            <button>Search</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="customer-service.html">Customer Service</a>
+            <a href="registry.html">Registry</a>
+            <a href="gift-cards.html">Gift Cards</a>
+            <a href="sell.html">Sell</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="sell-header">
+            <h1>Sell on Amazon</h1>
+            <p>Start selling your products to millions of customers worldwide</p>
+        </div>
+
+        <div class="sell-grid">
+            <div class="sell-card">
+                <h2>Individual Seller</h2>
+                <p>Start selling as an individual with no monthly subscription fee.</p>
+                <ul class="feature-list">
+                    <li>Pay per item sold</li>
+                    <li>No monthly fee</li>
+                    <li>Basic selling tools</li>
+                    <li>Limited product categories</li>
+                </ul>
+                <a href="#" class="cta-button">Start Selling</a>
+            </div>
+            <div class="sell-card">
+                <h2>Professional Seller</h2>
+                <p>Grow your business with advanced selling tools and features.</p>
+                <ul class="feature-list">
+                    <li>Monthly subscription</li>
+                    <li>Bulk listing tools</li>
+                    <li>Advanced reports</li>
+                    <li>All product categories</li>
+                </ul>
+                <a href="#" class="cta-button">Start Selling</a>
+            </div>
+            <div class="sell-card">
+                <h2>FBA (Fulfillment by Amazon)</h2>
+                <p>Let Amazon handle storage, packing, and shipping for you.</p>
+                <ul class="feature-list">
+                    <li>Prime shipping benefits</li>
+                    <li>Storage and fulfillment</li>
+                    <li>Customer service</li>
+                    <li>Multi-channel fulfillment</li>
+                </ul>
+                <a href="#" class="cta-button">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle sell card clicks
+        document.querySelectorAll('.sell-card').forEach(card => {
+            const button = card.querySelector('.cta-button');
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sellType = card.querySelector('h2').textContent;
+                
+                switch(sellType) {
+                    case 'Individual Seller':
+                        alert('Starting individual seller registration...');
+                        // Here you would typically redirect to an individual seller registration page
+                        break;
+                    case 'Professional Seller':
+                        alert('Starting professional seller registration...');
+                        // Here you would typically redirect to a professional seller registration page
+                        break;
+                    case 'FBA (Fulfillment by Amazon)':
+                        alert('Redirecting to FBA information page...');
+                        // Here you would typically redirect to an FBA information page
+                        break;
+                }
+            });
+        });
+
+        // Handle search functionality
+        document.querySelector('.search-bar button').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-bar input').value;
+            if (searchTerm.trim()) {
+                alert(`Searching for selling options matching "${searchTerm}"...`);
+            } else {
+                alert('Please enter a search term.');
+            }
+        });
+
+        // Handle search input enter key
+        document.querySelector('.search-bar input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-bar button').click();
+            }
+        });
+
+        // Handle feature list hover effects
+        document.querySelectorAll('.feature-list li').forEach(item => {
+            item.addEventListener('mouseover', function() {
+                this.style.transform = 'translateX(5px)';
+                this.style.transition = 'transform 0.2s ease';
+            });
+            
+            item.addEventListener('mouseout', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body>
+</html>

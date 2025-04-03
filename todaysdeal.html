@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Today's Deals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f3f3f3;
+        }
+
+        .header {
+            background-color: #131921;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .search-bar {
+            display: flex;
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search-bar button {
+            padding: 10px 15px;
+            background-color: #febd69;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .cart-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #febd69;
+            color: #131921;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .deals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .deals-title {
+            font-size: 28px;
+            color: #131921;
+        }
+
+        .deals-filter {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-button {
+            padding: 8px 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .deal-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .deal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .deal-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .deal-info {
+            padding: 15px;
+        }
+
+        .deal-discount {
+            background-color: #B12704;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .deal-title {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #0066c0;
+        }
+
+        .deal-price {
+            color: #B12704;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .deal-time {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .deal-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .add-to-cart {
+            background-color: #FFD814;
+            color: #131921;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #F7CA00;
+        }
+
+        .save-for-later {
+            background-color: white;
+            color: #0066c0;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .save-for-later:hover {
+            background-color: #f0f0f0;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+                max-width: none;
+            }
+
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .nav-links a {
+                padding: 5px 10px;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 4px;
+            }
+
+            .deals-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .deals-filter {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+
+            .deals-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .deal-image {
+                height: 180px;
+            }
+
+            .deal-info {
+                padding: 12px;
+            }
+
+            .deal-title {
+                font-size: 15px;
+            }
+
+            .deal-price {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 8px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .search-bar input {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .search-bar button {
+                padding: 8px 12px;
+            }
+
+            .nav-links {
+                gap: 5px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+                padding: 4px 8px;
+            }
+
+            .deals-title {
+                font-size: 24px;
+            }
+
+            .filter-button {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .deals-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .deal-image {
+                height: 200px;
+            }
+
+            .deal-info {
+                padding: 10px;
+            }
+
+            .deal-title {
+                font-size: 14px;
+            }
+
+            .deal-price {
+                font-size: 16px;
+            }
+
+            .deal-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .add-to-cart, .save-for-later {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Amazon</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for deals...">
+            <button>Search</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="customer-service.html">Customer Service</a>
+            <a href="registry.html">Registry</a>
+            <a href="gift-cards.html">Gift Cards</a>
+            <a href="sell.html">Sell</a>
+            <div class="cart-icon">
+                <a href="cart.html">Cart</a>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="deals-header">
+            <h1 class="deals-title">Today's Deals</h1>
+            <div class="deals-filter">
+                <button class="filter-button">All Deals</button>
+                <button class="filter-button">Featured</button>
+                <button class="filter-button">Ending Soon</button>
+                <button class="filter-button">Price Drop</button>
+            </div>
+        </div>
+
+        <div class="deals-grid" id="dealsGrid">
+            <!-- Deals will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample deals data
+        const deals = [
+            {
+                title: "Wireless Bluetooth Headphones",
+                price: "$49.99",
+                discount: "50% off",
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                timeLeft: "2h 30m left"
+            },
+            {
+                title: "Smart Watch Series 5",
+                price: "$199.99",
+                discount: "30% off",
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                timeLeft: "4h 15m left"
+            },
+            {
+                title: "4K Ultra HD Smart TV",
+                price: "$499.99",
+                discount: "25% off",
+                image: "https://images.unsplash.com/photo-1593359678259-9ae2bda7b073?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                timeLeft: "6h 45m left"
+            },
+            {
+                title: "Gaming Laptop",
+                price: "$899.99",
+                discount: "20% off",
+                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                timeLeft: "1h 20m left"
+            },
+            {
+                title: "Wireless Charging Pad",
+                price: "$29.99",
+                discount: "40% off",
+                image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                timeLeft: "3h 10m left"
+            },
+            {
+                title: "Smart Home Security Camera",
+                price: "$79.99",
+                discount: "35% off",
+                image: "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                timeLeft: "5h 50m left"
+            }
+        ];
+
+        // Function to create deal cards
+        function createDealCard(deal) {
+            return `
+                <div class="deal-card">
+                    <img src="${deal.image}" alt="${deal.title}" class="deal-image">
+                    <div class="deal-info">
+                        <div class="deal-discount">${deal.discount}</div>
+                        <h3 class="deal-title">${deal.title}</h3>
+                        <div class="deal-price">${deal.price}</div>
+                        <div class="deal-time">${deal.timeLeft}</div>
+                        <div class="deal-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="save-for-later">Save for Later</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to render deals
+        function renderDeals() {
+            const dealsGrid = document.getElementById('dealsGrid');
+            dealsGrid.innerHTML = deals.map(deal => createDealCard(deal)).join('');
+        }
+
+        // Handle filter buttons
+        document.querySelectorAll('.filter-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const filter = this.textContent;
+                alert(`Filtering deals by: ${filter}`);
+                // Here you would typically filter the deals based on the selected filter
+            });
+        });
+
+        // Handle add to cart buttons
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const deal = this.closest('.deal-card');
+                const title = deal.querySelector('.deal-title').textContent;
+                const price = deal.querySelector('.deal-price').textContent;
+                
+                alert(`Added ${title} (${price}) to your cart!`);
+                updateCartCount();
+            });
+        });
+
+        // Handle save for later buttons
+        document.querySelectorAll('.save-for-later').forEach(button => {
+            button.addEventListener('click', function() {
+                const deal = this.closest('.deal-card');
+                const title = deal.querySelector('.deal-title').textContent;
+                alert(`Saved ${title} for later!`);
+            });
+        });
+
+        // Update cart count
+        function updateCartCount() {
+            const cartCount = document.querySelector('.cart-count');
+            const currentCount = parseInt(cartCount.textContent);
+            cartCount.textContent = currentCount + 1;
+        }
+
+        // Handle search functionality
+        document.querySelector('.search-bar button').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-bar input').value;
+            if (searchTerm.trim()) {
+                alert(`Searching for deals matching "${searchTerm}"...`);
+            } else {
+                alert('Please enter a search term.');
+            }
+        });
+
+        // Handle search input enter key
+        document.querySelector('.search-bar input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-bar button').click();
+            }
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', renderDeals);
+    </script>
+</body>
+</html>
